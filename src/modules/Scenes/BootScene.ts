@@ -27,6 +27,7 @@ export default class BootScene extends Scene {
     this.load.image("apple", "/assets/apple.png");
     this.load.image("green_apple", "/assets/green_apple.png");
     this.load.image("body", "/assets/body.png");
+    this.load.image("snake_die", "/assets/snake_die.png");
   }
   create(): void {
     // fondo del juego
@@ -140,11 +141,12 @@ export default class BootScene extends Scene {
     return Phaser.Math.Between(1, 9) % 3 == 0;
   }
   private showEndGameLabel(): void {
+    this.add.image(180, -10, "snake_die").setOrigin(0, 0);
     //  Align this label to the right side.
     const x = this.cameras.main.width / 2;
     const y = this.cameras.main.height / 2;
     this.gameOverLabel = this.add
-      .bitmapText(x - 130, y - 10, "font_2x", "GAME OVER")
+      .bitmapText(x - 150, y + 160, "font_2x", "GAME OVER")
       .setOrigin(0, 0)
       .setVisible(true);
   }
