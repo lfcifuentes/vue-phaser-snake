@@ -1,32 +1,63 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <v-app>
+    <v-app-bar app color="deep-purple accent-4" dark>
+      <v-toolbar-title>Phaser Snake Game</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text @click="navTo('/')">
+        <span class="mr-2">Home</span>
+        <v-icon>mdi-gamepad-variant</v-icon>
+      </v-btn>
+      <v-btn text @click="navTo('/best-scores')">
+        <span class="mr-2">Best Scores</span>
+        <v-icon>mdi-format-list-bulleted-square</v-icon>
+      </v-btn>
+      <v-btn text @click="logOut()" v-show="$store.state.user.Id != ''">
+        <span class="mr-2">Log Out</span>
+        <v-icon>mdi-logout-variant</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <router-view />
+    </v-main>
+    <div class="text--disabled caption">
+      Iconos diseñados por
+      <a
+        class="text--secondary"
+        href="https://www.freepik.com"
+        title="Freepik"
+        target="_blank"
+        >Freepik</a
+      >
+      from
+      <a
+        class="text--secondary"
+        href="https://www.flaticon.es/"
+        title="Flaticon"
+        target="_blank"
+        >www.flaticon.es</a
+      >
     </div>
-    <router-view />
-  </div>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import Vue from "vue";
+import { userDefault } from "../src/services/const";
 
-#nav {
-  padding: 30px;
+export default Vue.extend({
+  name: "App",
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+  methods: {
+    navTo(url: string): void {
+      this.$router.push(url);
+    },
+    logOut(): void {
+      this.$store.commit("setUser", JSON.parse(userDefault));
+      if (this.$router.currentRoute.path != "/") {
+        this.navTo("/");
+      }
+    },
+  },
+});
+</script>

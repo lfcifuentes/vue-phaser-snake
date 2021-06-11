@@ -1,0 +1,66 @@
+:root {
+  --purple-linear: linear-gradient(to right, hsl(234, 97%, 70%) 0%, hsl(276, 70%, 58%) 100%);
+  --pink-linear: linear-gradient(to right, hsl(37, 97%, 70%) 0%, hsl(329, 70%, 58%) 100%);
+}
+.scores-container {
+  padding-top: 2rem;
+}
+#game-container {
+  position: relative;
+  margin: .8rem;
+  padding-top: 3px;
+  overflow: hidden;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  &:before {
+    content: "";
+    height: 4px;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-image: var(--purple-linear);
+  }
+}
+.card {
+  text-align: center;
+  background-color: #252a41;
+  border-radius: 8px;
+  padding: 1.7em 0;
+  margin-top: 1em;
+  position: relative;
+  overflow: hidden;
+  &:before {
+    // background-color: rgb(25, 143, 245);
+    background-image: var(--purple-linear);
+    content: "";
+    height: 4px;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  &.pink-linear:before {
+    background-image: var(--pink-linear);
+  }
+  &-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b97c6;
+    margin: 15px 0;
+    font-size: 1.5rem;
+  }
+  &-followers-number {
+    font-size: 3.5rem;
+    margin: 0;
+    color: #ffffff;
+    font-weight: 700;
+    display: block;
+  }
+}
+.img-phaser {
+  max-width: 500px;
+}
