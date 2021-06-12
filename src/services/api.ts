@@ -26,6 +26,10 @@ const API = {
       getBestScores(): Promise<AxiosResponse<any>> {
         return instance.get("users/best-scores");
       },
+      // eslint-disable-next-line
+      updateUserName(params: any): Promise<AxiosResponse<any>>{
+        return instance.post("users/update", params);
+      },
     };
 
     Vue.prototype.$axios = instance;

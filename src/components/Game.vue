@@ -16,7 +16,7 @@
           <span class="white--text"><v-icon>mdi-account</v-icon></span>
         </v-avatar>
         <h2 class="font-weight-light text--secondary">
-          Current user: {{ $store.state.user.username || "" }}
+          Current user: {{ $store.state.user.Username || "" }}
         </h2>
       </div>
       <Card title="Score" :number="parseInt($store.state.points) || 0" />

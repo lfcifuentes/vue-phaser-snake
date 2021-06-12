@@ -77,18 +77,18 @@ export default class BootScene extends Scene {
     //   this.snake?.turnUp();
     // }
   }
-  private updateLogic(time: number): void {
+  private updateLogic(): void {
     // verificar la colición con la comida
     if (this.snake.collideWithFood(this.food, this.points)) {
       this.updatePoints(5);
-      this.food.reposition(this.snake, this.bad_food);
+      this.food.reposition(this.snake, this.bad_food, this.walls);
       if (this.food_count % OBSTACLES == 0) {
         if (this.insertWall()) {
           // insert pared
           this.walls.insert(this.snake);
         }
         if (this.changeWAllsPosition() && this.walls.body.getLength() > 0) {
-          this.walls.reposition(this.snake);
+          this.walls.reposition(this.snake, this.food, this.bad_food);
         }
       }
       if (this.insertApple()) {

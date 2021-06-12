@@ -1,6 +1,7 @@
 import Snake from "./Snake";
 import BadFood from "./BadFood";
 import { LENGTH, WIDTH, HEIGHT } from "@/services/const";
+import Wall from "./Wall";
 
 const check = (num: number | undefined): number => {
   if (num) {
@@ -18,7 +19,7 @@ export default class Food extends Phaser.GameObjects.Image {
     this.setVisible(true);
     scene.children.add(this);
   }
-  reposition(snake: Snake, bad_food: BadFood): boolean {
+  reposition(snake: Snake, bad_food: BadFood, walls: Wall): boolean {
     //  Primero, cree una cuadrícula que asuma que todas las posiciones
     // son válidas para el nuevo alimento.
     const testGrid = Array.from(
@@ -37,6 +38,7 @@ export default class Food extends Phaser.GameObjects.Image {
     snake.updateGrid(testGrid);
     if (snake.alive) {
       bad_food.updateGrid(testGrid);
+      walls.updateGrid(testGrid);
     }
     //  Purgue las posiciones falsas.
     const validLocations = [];

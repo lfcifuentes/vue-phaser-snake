@@ -1,5 +1,7 @@
 import { LENGTH, WIDTH, HEIGHT } from "@/services/const";
 import Snake from "./Snake";
+import Food from "./Food";
+import BadFood from "./BadFood";
 export default class Wall {
   body: Phaser.GameObjects.Group;
   constructor(scene: Phaser.Scene) {
@@ -57,22 +59,29 @@ export default class Wall {
     }
     return grid;
   }
-  reposition(snake: Snake): void {
+  reposition(snake: Snake, food: Food, bad_food: BadFood): void {
     const testGrid: boolean[][] = this.generateGrid(snake);
-
+    if (snake.alive) {
+      bad_food.updateGrid(testGrid);
+    }
+    const food_x: number = food.x / LENGTH;
+    const food_y: number = food.y / LENGTH;
+    console.log(food_x, food_y, LENGTH, WIDTH, HEIGHT);
     const validLocations = [];
 
     for (let y = 0; y < HEIGHT; y++) {
       for (let x = 0; x < WIDTH; x++) {
-        if (testGrid[y][x] === true) {
+        if (testGrid[y][x] === true && y != food_y && x != food_x) {
           validLocations.push({ x, y });
         }
       }
     }
-    const random = Phaser.Math.RND.shuffle(validLocations);
-    this.body.getChildren().map((e, i) => {
-      e.x = random[i].x * LENGTH;
-      e.y = random[i].y * LENGTH;
-    });
+    if (this.body.getLength() > 0) {
+      const random = Phaser.Math.RND.shuffle(validLocations);
+      this.body.getChildren().map((e, i) => {
+        e.x = random[i].x * LENGTH;
+        e.y = random[i].y * LENGTH;
+      });
+    }
   }
 }

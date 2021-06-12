@@ -1,34 +1,28 @@
 <template>
-  <div class="d-flex flex-column justify-center align-center">
-    <v-img class="img-phaser" src="assets/phaser.png" alt="PHASER LOGO"></v-img>
+  <div>
     <v-text-field label="Username" v-model="username" outlined></v-text-field>
     <v-btn
       x-large
       outlined
       color="deep-purple accent-4"
       class="ma-2 white--text"
-      @click="sendUserName()"
+      @click="updateUserName()"
       :loading="loading"
     >
-      Log In
-      <v-icon right dark>mdi-play-circle-outline</v-icon>
+      Update
+      <v-icon right dark>mdi-content-save</v-icon>
     </v-btn>
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Game from "@/components/Game.vue"; // @ is an alias to /src
-
 @Component({
-  components: {
-    Game,
-  },
+  components: {},
 })
-export default class Home extends Vue {
+export default class FormProfile extends Vue {
   username = "" || this.$store.state.user.Username;
   loading = false;
-  sendUserName(): void {
+  updateUserName(): void {
     if (this.username == "") {
       this.$toast.open({
         message: "Username is required!",
@@ -38,17 +32,26 @@ export default class Home extends Vue {
     }
     this.loading = true;
     this.$api
-      .getUser({ username: this.username })
-      .then((e) => {
-        this.$store.commit("setUser", e.data.data);
-        this.$router.push("/game");
-        this.loading = false;
-        this.$toast.open({
-          message: "welcome!!",
-          type: "info",
-        });
+      .updateUserName({
+        ...this.$store.state.user,
+        Username: this.username,
       })
-      .catch((err) => {
+      .then((e: any) => {
+        this.loading = false;
+        if (e.data.status == 200) {
+          this.$store.commit("setUser", e.data.data);
+          this.$toast.open({
+            message: "Update!!",
+            type: "info",
+          });
+        } else {
+          this.$toast.open({
+            message: e.data.message,
+            type: "error",
+          });
+        }
+      })
+      .catch((err: any) => {
         console.warn(err);
         this.$toast.open({
           message: "an error has occurred, please try again",

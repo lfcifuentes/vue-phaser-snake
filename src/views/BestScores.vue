@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <div class="card">
+      <div class="card no-padding">
         <div class="card-title">Best Scores</div>
         <div class="card-body">
           <v-data-table
@@ -73,21 +73,4 @@ export default class BestScores extends Vue {
 }
 </script>
 
-<style>
-.card {
-  padding: 0;
-}
-.card-body {
-  padding: 1rem;
-}
-.card .theme--dark.v-data-table {
-  background-color: transparent;
-}
-.theme--dark.v-data-table
-  > .v-data-table__wrapper
-  > table
-  > tbody
-  > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
-  background: #00000057 !important;
-}
-</style>
+<style></style>

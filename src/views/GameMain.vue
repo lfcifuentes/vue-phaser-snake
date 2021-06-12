@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div>
-      <Game />
-    </div>
+    <Game />
   </div>
 </template>
 

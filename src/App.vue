@@ -11,6 +11,14 @@
         <span class="mr-2">Best Scores</span>
         <v-icon>mdi-format-list-bulleted-square</v-icon>
       </v-btn>
+      <v-btn
+        text
+        @click="navTo('/profile')"
+        v-show="$store.state.user.Id != ''"
+      >
+        <span class="mr-2">Profile</span>
+        <v-icon>mdi-account-circle-outline</v-icon>
+      </v-btn>
       <v-btn text @click="logOut()" v-show="$store.state.user.Id != ''">
         <span class="mr-2">Log Out</span>
         <v-icon>mdi-logout-variant</v-icon>

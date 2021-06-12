@@ -60,6 +60,25 @@
     font-weight: 700;
     display: block;
   }
+  &-body {
+    padding: 1rem;
+  }
+  .no-padding {
+    padding: 0;
+    .card-body {
+      padding: 1rem;
+    }
+  }
+  .theme--dark.v-data-table {
+    background-color: transparent;
+  }
+  .theme--dark.v-data-table
+    > .v-data-table__wrapper
+    > table
+    > tbody
+    > tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+    background: #00000057 !important;
+  }
 }
 .img-phaser {
   max-width: 500px;

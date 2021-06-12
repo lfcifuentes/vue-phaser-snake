@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Home from "../views/Home.vue";
 import GameMain from "../views/GameMain.vue";
 import BestScores from "../views/BestScores.vue";
+import Profile from "../views/Profile.vue";
 import store from "@/store";
 Vue.use(VueRouter);
 
@@ -32,6 +33,15 @@ const routes: Array<RouteConfig> = [
     meta: {
       requireName: false,
       title: "Best Scores",
+    },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    meta: {
+      requireName: true,
+      title: "Profile",
     },
   },
 ];
